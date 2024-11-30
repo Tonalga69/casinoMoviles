@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.casino"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.casino"
@@ -45,4 +45,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    runtimeOnly(libs.kotlinx.serialization.json)
+
 }
