@@ -33,6 +33,8 @@ El sistema utiliza **`SharedPreferences`** para guardar y recuperar datos de usu
    - `password`: Contraseña.
    - `idUsuario`: identificador.
    - `isAdmin`: boleano si es admin o no.
+   
+   **La contraseña del admin es "admin" y el nombre de usuario es "admin". y su Id es 1**
    Ejemplo de deserialización:
    ```kotlin
    for (user in users) {
