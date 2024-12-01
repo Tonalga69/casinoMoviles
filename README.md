@@ -18,7 +18,7 @@ El sistema utiliza **`SharedPreferences`** para guardar y recuperar datos de usu
 
 1. **Inicialización de SharedPreferences**  
    ```kotlin
-   val sharedPreferences: SharedPreferences = context.getSharedPreferences("Usuarios", Context.MODE_PRIVATE)
+   val sharedPreferences: SharedPreferences = context.getSharedPreferences("Default", Context.MODE_PRIVATE)
    ```
 
 2. **Obtención de datos**  
@@ -32,6 +32,7 @@ El sistema utiliza **`SharedPreferences`** para guardar y recuperar datos de usu
    - `username`: Nombre de usuario.
    - `password`: Contraseña.
    - `idUsuario`: identificador.
+   - `isAdmin`: boleano si es admin o no.
    Ejemplo de deserialización:
    ```kotlin
    for (user in users) {
@@ -39,6 +40,23 @@ El sistema utiliza **`SharedPreferences`** para guardar y recuperar datos de usu
        println(usuario)
    }
    ```
+   
+4. **Obtener las probabilidades de los juegos**
+     Devuelve las probabilidades de los juegos en formato JSON.
+    ```kotlin
+    val probabilidades = sharedPreferences.getString("probabilidades", "")
+    ```
+   
+5. **Conversión de JSON a objetos**
+    Cada cadena JSON se convierte en una instancia de la clase `Probabilidades`. Esta clase contiene los siguientes atributos:
+    - `ganarMomios`: Probabilidad de la ruleta. Tipo de dato Float.
+    - `ganarMaquinas`: Probabilidad de las tragamonedas Tipo de dato Float.
+    - `ganarRuleta`: Probabilidad de las tragamonedas Tipo de dato Float.
+    Ejemplo de deserialización:
+    ```kotlin
+    val probabilidades = Json.decodeFromString<Probabilidades>(probabilidades)
+    
+    ```
 
 ### Almacenamiento y recuperación de datos internos de usuarios
 
@@ -53,7 +71,7 @@ Se gestiona información interna específica para cada usuario mediante un ident
    Los datos internos se almacenan como un conjunto de cadenas (`Set<String>`) en formato JSON:
    ```kotlin
 
-   val IDusuario = sharedPreferences.getString("IDusuario", "")
+   val IDusuario = sharedPreferences.getString("Idusuario", "")
     val nombre = sharedPreferences.getString("nombre", "")
     val contraseña = sharedPreferences.getString("contraseña", "")
     val idioma = sharedPreferences.getString("idioma", "")
@@ -81,6 +99,7 @@ Se gestiona información interna específica para cada usuario mediante un ident
 ## Referencias
 
 - [Documentación oficial de kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
+- [Diagrama de clases UML](https://lucid.app/lucidchart/e0738732-85ea-42d4-8450-97f2eca426c4/edit?invitationId=inv_1606e298-3139-46d0-8f36-af0cab4b7b6a&page=HWEp-vi-RSFO#)
 - [Documentación oficial de SharedPreferences en Android](https://developer.android.com/training/data-storage/shared-preferences)
 
 ---

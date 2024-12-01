@@ -9,4 +9,7 @@
     <string name="Noaccount">No tienes cuenta? Crea una aquí</string>
     <string name="register">Registrarse</string>
     <string name="goToLogin">¿Ya tienes cuenta? Inicia sesión</string>
+    <string name="userOrPasswordIncorrect">Usuario o contraseña incorrectos</string>
+    <string name="userAlreadyRegistered">Usuario ya registrado</string>
+    <string name="fillAllFields">Llene todos los campos</string>
 </resources>
