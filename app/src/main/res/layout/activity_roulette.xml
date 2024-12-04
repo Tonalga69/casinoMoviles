@@ -8,10 +8,33 @@
     tools:context=".roulette">
 
     <Button
-        android:id="@+id/spinButton"
+        android:id="@+id/btnSpin"
         android:layout_width="91dp"
         android:layout_height="86dp"
-        android:text="Button"
+        android:text="@string/spin"
         tools:layout_editor_absoluteX="266dp"
-        tools:layout_editor_absoluteY="579dp" />
+        tools:layout_editor_absoluteY="542dp" />
+
+    <TextView
+        android:id="@+id/txtMontoApostado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/monto_apostado"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="560dp" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="317dp"
+        android:layout_height="302dp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <TextView
+        android:id="@+id/txtTituloRuleta"
+        android:layout_width="221dp"
+        android:layout_height="45dp"
+        android:text="@string/ruleta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

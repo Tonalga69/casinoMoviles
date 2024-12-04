@@ -22,4 +22,7 @@
     <string name="administrar_momios">Administrar momios</string>
     <string name="irMomios">Ir a momios</string>
     <string name="updated_prob">Probabilidad actualizada</string>
+    <string name="monto_apostado">Monto Apostado</string>
+    <string name="ruleta">Ruleta</string>
+    <string name="spin">Spin</string>
 </resources>
