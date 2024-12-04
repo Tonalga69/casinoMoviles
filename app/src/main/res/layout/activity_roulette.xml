@@ -7,4 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".roulette">
 
+    <Button
+        android:id="@+id/spinButton"
+        android:layout_width="91dp"
+        android:layout_height="86dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="266dp"
+        tools:layout_editor_absoluteY="579dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
