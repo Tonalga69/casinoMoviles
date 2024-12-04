@@ -1,5 +1,6 @@
 package com.example.casino
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         val textViewTest = findViewById<TextView>(R.id.textViewTest)
         intent.getStringExtra("IdUsuario")?.let {
             textViewTest.text = it
+        }
+        intent.getBooleanExtra("isAdmin", false).let{
+            if(it){
+                val intent = Intent(this, AdminSaldosActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
