@@ -12,4 +12,14 @@
     <string name="userOrPasswordIncorrect">Usuario o contraseña incorrectos</string>
     <string name="userAlreadyRegistered">Usuario ya registrado</string>
     <string name="fillAllFields">Llene todos los campos</string>
+    <string name="admin">Admin</string>
+    <string name="resetear">Resetear todos los saldos</string>
+    <string name="reset">Reset</string>
+    <string name="advertencia">Advertencia: No se podrá recuperar \n los saldos una vez reiniciados.</string>
+    <string name="probabilidades">Probabilidades de ganar</string>
+    <string name="tragamonedas">Tragamonedas</string>
+    <string name="aplicar">Aplicar</string>
+    <string name="administrar_momios">Administrar momios</string>
+    <string name="irMomios">Ir a momios</string>
+    <string name="updated_prob">Probabilidad actualizada</string>
 </resources>
