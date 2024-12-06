@@ -30,4 +30,6 @@
     <string name="spin">Spin</string>
     <string name="administrar_saldo">Administrar saldo</string>
     <string name="saldo_actual">saldo_actual</string>
+    <string name="agregar">Agregar</string>
+    <string name="imagen_de_administrar_saldo">imagen de administrar saldo</string>
 </resources>
