@@ -58,8 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 val usuarioLoginData = Json.decodeFromString(UsuarioLoginData.serializer(), it)
                 usuarioLoginData.userName == nameEditText.text.toString() && usuarioLoginData.password == passwordEditText.text.toString()
             }
-            if (usuario != null) {
-                val user= Json.decodeFromString(UsuarioLoginData.serializer(), usuario)
+            if (usuario != null) {////
+                val user = Json.decodeFromString(UsuarioLoginData.serializer(), usuario)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("IdUsuario", user.idUsuario)
                 intent.putExtra("isAdmin", user.isAdmin)

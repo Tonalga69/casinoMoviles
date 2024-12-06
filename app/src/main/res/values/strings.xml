@@ -22,4 +22,12 @@
     <string name="administrar_momios">Administrar momios</string>
     <string name="irMomios">Ir a momios</string>
     <string name="updated_prob">Probabilidad actualizada</string>
+    <string name="momios_liga_mx">Momios liga MX</string>
+    <string name="partido">Partido:</string>
+    <string name="ajustar_momios">Ajustar Momios</string>
+    <string-array name="partidos_array">
+        <item>Chivas vs Atlas</item>
+        <item>América vs Pumas</item>
+    </string-array>
 </resources>
+

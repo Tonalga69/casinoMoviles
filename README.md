@@ -1,8 +1,8 @@
 # Casino Fortuna
 
-Este repositorio es una demostración del uso de **`kotlinx.serialization`** para la serialización y deserialización de datos en formato JSON, utilizando **`SharedPreferences`** como almacenamiento local en una aplicación Android.  
+Este repositorio es una demostración del uso de **`kotlinx.serialization`** para la serialización y deserialización de datos en formato JSON, utilizando **`SharedPreferences`** como almacenamiento local en una aplicación Android.
 
-## Estructura del proyecto
+## Estructura del proyecto :)
 
 ```
 root
@@ -16,61 +16,68 @@ root
 
 El sistema utiliza **`SharedPreferences`** para guardar y recuperar datos de usuarios en formato JSON. A continuación, se describe el flujo principal:
 
-1. **Inicialización de SharedPreferences**  
+1. **Inicialización de SharedPreferences**
+
    ```kotlin
    val sharedPreferences: SharedPreferences = context.getSharedPreferences("Default", Context.MODE_PRIVATE)
    ```
 
 2. **Obtención de datos**  
    Los datos se almacenan como un conjunto de cadenas (`Set<String>`) en formato JSON:
+
    ```kotlin
    val users = sharedPreferences.getStringSet("usuarios", mutableSetOf())
    ```
 
 3. **Conversión de JSON a objetos**  
    Cada cadena JSON se convierte en una instancia de la clase `UsuarioLoginData`. Esta clase contiene los siguientes atributos:
+
    - `username`: Nombre de usuario.
    - `password`: Contraseña.
    - `idUsuario`: identificador.
    - `isAdmin`: boleano si es admin o no.
-   
+
    **La contraseña del admin es "admin" y el nombre de usuario es "admin". y su Id es 1**
    Ejemplo de deserialización:
+
    ```kotlin
    for (user in users) {
        val usuario = Json.decodeFromString<UsuarioLoginData>(user)
        println(usuario)
    }
    ```
-   
+
 4. **Obtener las probabilidades de los juegos**
-     Devuelve las probabilidades de los juegos en formato JSON.
-    ```kotlin
-    val probabilidades = sharedPreferences.getString("probabilidades", "")
-    ```
-   
+   Devuelve las probabilidades de los juegos en formato JSON.
+   ```kotlin
+   val probabilidades = sharedPreferences.getString("probabilidades", "")
+   ```
 5. **Conversión de JSON a objetos**
-    Cada cadena JSON se convierte en una instancia de la clase `Probabilidades`. Esta clase contiene los siguientes atributos:
-    - `ganarMomios`: Probabilidad de la ruleta. Tipo de dato Float.
-    - `ganarMaquinas`: Probabilidad de las tragamonedas Tipo de dato Float.
-    - `ganarRuleta`: Probabilidad de las tragamonedas Tipo de dato Float.
-    Ejemplo de deserialización:
-    ```kotlin
-    val probabilidades = Json.decodeFromString<Probabilidades>(probabilidades)
-    
-    ```
+   Cada cadena JSON se convierte en una instancia de la clase `Probabilidades`. Esta clase contiene los siguientes atributos:
+
+   - `ganarMomios`: Probabilidad de la ruleta. Tipo de dato Float.
+   - `ganarMaquinas`: Probabilidad de las tragamonedas Tipo de dato Float.
+   - `ganarRuleta`: Probabilidad de las tragamonedas Tipo de dato Float.
+     Ejemplo de deserialización:
+
+   ```kotlin
+   val probabilidades = Json.decodeFromString<Probabilidades>(probabilidades)
+
+   ```
 
 ### Almacenamiento y recuperación de datos internos de usuarios
 
 Se gestiona información interna específica para cada usuario mediante un identificador único (`IdUsuario`):
 
-1. **Inicialización de SharedPreferences**  
+1. **Inicialización de SharedPreferences**
+
    ```kotlin
    val sharedPreferences: SharedPreferences = context.getSharedPreferences(IdUsuario, Context.MODE_PRIVATE)
    ```
 
 2. **Obtención de datos**  
    Los datos internos se almacenan como un conjunto de cadenas (`Set<String>`) en formato JSON:
+
    ```kotlin
 
    val IDusuario = sharedPreferences.getString("Idusuario", "")
@@ -91,11 +98,14 @@ Se gestiona información interna específica para cada usuario mediante un ident
        println(historial)
    }
    ```
+## Recuperacion del proyecto
+
+   Al hacer pull es necesario sincronizar el proyecto con el Gradle, presionando sobre el icono de elefante en la parte superior derecha del IDE 
 
 ## Tecnologías y bibliotecas utilizadas
 
-- [Kotlin](https://kotlinlang.org/)  
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)  
+- [Kotlin](https://kotlinlang.org/)
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
 - **SharedPreferences**: Almacenamiento de datos persistente en Android.
 
 ## Referencias

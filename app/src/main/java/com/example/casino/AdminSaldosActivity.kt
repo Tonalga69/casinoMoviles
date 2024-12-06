@@ -12,9 +12,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class AdminSaldosActivity : AppCompatActivity() {
-    lateinit var editTextTragamonedas : EditText
-    lateinit var buttonAplicar : Button
-    lateinit var buttonMomios : Button
+    lateinit var editTextTragamonedas: EditText
+    lateinit var buttonAplicar: Button
+    lateinit var buttonMomios: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,10 +28,10 @@ class AdminSaldosActivity : AppCompatActivity() {
         buttonAplicar = findViewById(R.id.buttonAplicar)
         buttonMomios = findViewById(R.id.buttonMomios)
         val sharedPreferences = getSharedPreferences("Default", Context.MODE_PRIVATE)
-        val probabilidadTragamonedas= sharedPreferences.getFloat("tragamonedas", 50.0f)
+        val probabilidadTragamonedas = sharedPreferences.getFloat("tragamonedas", 50.0f)
         editTextTragamonedas.setText(probabilidadTragamonedas.toString())
         buttonAplicar.setOnClickListener {
-            if(editTextTragamonedas.text.toString().isEmpty()){
+            if (editTextTragamonedas.text.toString().isEmpty()) {
                 return@setOnClickListener
             }
             val probabilidad = editTextTragamonedas.text.toString().toFloat()
@@ -39,9 +39,9 @@ class AdminSaldosActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.updated_prob), Toast.LENGTH_SHORT).show()
 
         }
-        
+
         buttonMomios.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MomiosAdminActivity::class.java)
             startActivity(intent)
         }
 

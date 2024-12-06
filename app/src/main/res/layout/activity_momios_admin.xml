@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Dropdown para seleccionar el partido -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/casino_fortuna_10_removebg_preview" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="-20dp"
+        android:text="Ajustar Momios" />
+
+    <Spinner
+        android:id="@+id/spinnerPartidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:entries="@array/partidos_array"
+        android:spinnerMode="dropdown" />
+
+    <!-- Label y número para el equipo 1 -->
+    <TextView
+        android:id="@+id/equipo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Equipo 1"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/momio1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Momio a favor del equipo 1"
+        android:inputType="numberDecimal" />
+
+    <!-- Label y número para el equipo 2 -->
+    <TextView
+        android:id="@+id/equipo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Equipo 2"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/momio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Momio a favor del equipo 2"
+        android:inputType="numberDecimal" />
+
+    <!-- Número para empate -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Empate" />
+
+    <EditText
+        android:id="@+id/momio3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Momio para empate"
+        android:inputType="numberDecimal" />
+
+    <!-- Botón para guardar -->
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:text="Guardar" />
+</LinearLayout>
