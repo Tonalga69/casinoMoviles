@@ -22,6 +22,9 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".SaldoActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -40,5 +43,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

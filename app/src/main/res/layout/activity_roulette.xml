@@ -11,30 +11,55 @@
         android:id="@+id/btnSpin"
         android:layout_width="91dp"
         android:layout_height="86dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
         android:text="@string/spin"
-        tools:layout_editor_absoluteX="266dp"
-        tools:layout_editor_absoluteY="542dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtMontoApostado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="76dp"
         android:text="@string/monto_apostado"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="560dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSpin"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="317dp"
         android:layout_height="302dp"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="161dp" />
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloRuleta" />
 
     <TextView
         android:id="@+id/txtTituloRuleta"
         android:layout_width="221dp"
         android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/ruleta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="96dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ruleta" />
 </androidx.constraintlayout.widget.ConstraintLayout>

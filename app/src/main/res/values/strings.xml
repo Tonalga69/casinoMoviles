@@ -25,4 +25,6 @@
     <string name="monto_apostado">Monto Apostado</string>
     <string name="ruleta">Ruleta</string>
     <string name="spin">Spin</string>
+    <string name="administrar_saldo">Administrar saldo</string>
+    <string name="saldo_actual">saldo_actual</string>
 </resources>
