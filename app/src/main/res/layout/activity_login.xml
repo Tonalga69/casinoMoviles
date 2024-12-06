@@ -5,68 +5,85 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textSize="24sp"
-        android:layout_marginTop="30dp"
+        android:text="@string/logintext"
+        android:textSize="40sp"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/button_text_color"
+        android:fontFamily="@font/jacques_francois_shadow"/>
 
 
     <TextView
         android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nombre_de_usuario"
-        android:layout_marginTop="30dp"
-        android:textSize="18sp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/cormorant_unicase"
+        android:text="@string/nombre_de_usuario"
+        android:textColor="@color/button_text_color"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login" />
 
     <EditText
         android:id="@+id/editTextUserName"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="65dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
+        android:autofillHints="name"
+        android:background="@drawable/edit_text_background"
+        android:textSize="24sp"
+        android:fontFamily="@font/cormorant_infant"
+        android:textColorHint="@color/edit_text_color"
+        android:gravity="center"
         android:hint="@string/userName"
         android:inputType="text"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="name"
         app:layout_constraintTop_toBottomOf="@id/textViewUserName" />
 
     <TextView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:layout_marginTop="30dp"
-        android:textSize="18sp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/cormorant_unicase"
+        android:text="@string/passwordtext"
+        android:textColor="@color/button_text_color"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextUserName" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="65dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
+        android:autofillHints="password"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/cormorant_infant"
+        android:textColorHint="@color/edit_text_color"
+        android:textSize="24sp"
+        android:gravity="center"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="password"
         app:layout_constraintTop_toBottomOf="@id/textViewPassword" />
 
     <LinearLayout
@@ -79,36 +96,47 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         android:layout_height="wrap_content">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:layout_width="150dp"
-            android:layout_height="48dp"
+            android:layout_height="73dp"
             android:text="@string/login"
             android:id="@+id/buttonLogin"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/button_color"
+            android:textColor="@color/button_text_color"
+            android:textSize="23sp"
+            android:fontFamily="@font/jacques_francois_shadow"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:layout_width="150dp"
-            android:layout_height="48dp"
+            android:layout_height="73dp"
             android:text="@string/clean"
             android:id="@+id/buttonClean"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/button_color"
+            android:textColor="@color/button_text_color"
+            android:textSize="23sp"
+            android:fontFamily="@font/jacques_francois_shadow"/>
     </LinearLayout>
 
 
     <Button
-        style="?android:attr/buttonBarButtonStyle"
         android:id="@+id/changeLanguageButton"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/changeLanguage"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonRegister" />
+        android:fontFamily="@font/cormorant_infant"
+        android:text="@string/changeLanguage"
+        android:textColor="@color/link_text_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/buttonRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         style="?android:attr/buttonBarButtonStyle"
@@ -117,12 +145,14 @@
         android:layout_height="wrap_content"
         android:text="@string/Noaccount"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="@font/cormorant_infant"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/link_text_color"/>
 
 
 
