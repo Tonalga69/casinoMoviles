@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">Casino</string>
-    <string name="login">Inicia sesión</string>
-    <string name="nombre_de_usuario">Nombre de usuario</string>
-    <string name="userName">Nombre</string>
-    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="logintext">Inicia sesión</string>
+    <string name="nombre_de_usuario">Usuario:</string>
+    <string name="userName">Ingresa tu nombre</string>
+    <string name="passwordtext">Contraseña:</string>
+    <string name="password">Ingresa tu contraseña</string>
     <string name="clean">Limpiar</string>
     <string name="changeLanguage">Don\'t you speak English?, click here</string>
     <string name="Noaccount">No tienes cuenta? Crea una aquí</string>
-    <string name="register">Registrarse</string>
+    <string name="registertext">Registro</string>
+    <string name="register">Registrar</string>
     <string name="goToLogin">¿Ya tienes cuenta? Inicia sesión</string>
     <string name="userOrPasswordIncorrect">Usuario o contraseña incorrectos</string>
     <string name="userAlreadyRegistered">Usuario ya registrado</string>
