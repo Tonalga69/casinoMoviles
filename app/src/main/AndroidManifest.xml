@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Casino"
         tools:targetApi="31">
         <activity
-            android:name=".roulette"
+            android:name=".RouletteActivity"
             android:exported="false" />
         <activity
             android:name=".AdminSaldosActivity"
@@ -27,6 +27,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
