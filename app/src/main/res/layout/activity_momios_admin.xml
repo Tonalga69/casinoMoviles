@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -12,78 +12,104 @@
         android:id="@+id/imageView"
         android:layout_width="35dp"
         android:layout_height="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/casino_fortuna_10_removebg_preview" />
+
+    <!-- Label y número para el equipo 1 -->
+
+    <!-- Label y número para el equipo 2 -->
+
+    <!-- Número para empate -->
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="-20dp"
-        android:text="Ajustar Momios" />
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:text="Ajustar Momios"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerPartidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="28dp"
         android:entries="@array/partidos_array"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <!-- Label y número para el equipo 1 -->
     <TextView
         android:id="@+id/equipo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Equipo 1"
-        android:textSize="16sp" />
+        android:layout_marginTop="36dp"
+        android:text="@string/equipo_1"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPartidos" />
 
     <EditText
         android:id="@+id/momio1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Momio a favor del equipo 1"
-        android:inputType="numberDecimal" />
+        android:hint="@string/momio_a_favor_del_equipo_1"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipo1" />
 
-    <!-- Label y número para el equipo 2 -->
+
     <TextView
         android:id="@+id/equipo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Equipo 2"
-        android:textSize="16sp" />
+        android:text="@string/equipo_2"
+        android:textSize="16sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/momio1" />
 
     <EditText
         android:id="@+id/momio2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Momio a favor del equipo 2"
-        android:inputType="numberDecimal" />
+        android:layout_marginTop="4dp"
+        android:hint="@string/momio_a_favor_del_equipo_2"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipo2" />
 
-    <!-- Número para empate -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Empate" />
+        android:layout_marginTop="4dp"
+        android:text="@string/empate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/momio2" />
 
     <EditText
         android:id="@+id/momio3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Momio para empate"
-        android:inputType="numberDecimal" />
+        android:layout_marginTop="4dp"
+        android:hint="@string/momio_para_empate"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <!-- Botón para guardar -->
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:text="Guardar" />
-</LinearLayout>
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="608dp"
+        android:text="@string/guardar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

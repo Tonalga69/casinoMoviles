@@ -91,6 +91,7 @@ class MomiosAdminActivity : AppCompatActivity() {
         momio3Input.setText(partido.momio3.toString())
     }
 
+
     private fun cargarPartidos(): List<Partido> {
         val sharedPreferences = getSharedPreferences("momios", MODE_PRIVATE)
         val partidosJson = sharedPreferences.getString("momios", "[]")

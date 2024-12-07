@@ -28,6 +28,22 @@
     <string name="momios_liga_mx">Momios liga MX</string>
     <string name="partido">Partido:</string>
     <string name="ajustar_momios">Ajustar Momios</string>
+    <string name="momio_a_favor_del_equipo_1">Momio a favor del equipo 1</string>
+    <string name="equipo_1">Equipo 1</string>
+    <string name="equipo_2">Equipo 2</string>
+    <string name="momio_a_favor_del_equipo_2">Momio a favor del equipo 2</string>
+    <string name="empate">Empate</string>
+    <string name="momio_para_empate">Momio para empate</string>
+    <string name="guardar">Guardar</string>
+    <string name="monto_apostado">Monto apostado</string>
+    <string name="apuestele_pues">Apuestele pues…</string>
+    <string name="enviar_apuesta">Enviar apuesta</string>
+    <string name="verificar_apuestas">Verificar apuestas</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="dinero_ganado_0_0">Dinero ganado: 0.0</string>
+    <string name="dinero_perdido_0_0">Dinero perdido: 0.0</string>
+    <string name="resultados_de_los_partidos">Resultados de los partidos</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>
