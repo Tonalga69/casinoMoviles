@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val isAdmin = intent.getBooleanExtra("isAdmin", false)
-         idUsuario = intent.getStringExtra("IdUsuario") ?: ""
+        idUsuario = intent.getStringExtra("IdUsuario") ?: ""
 
         if (idUsuario.isEmpty()) {
             val defaultSharedPreferences = getSharedPreferences("default", MODE_PRIVATE)
@@ -69,7 +69,8 @@ class MainActivity : AppCompatActivity() {
         val username = sharedPreferences.getString("nombre", "")
         val saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
-        Toast.makeText(this, getString(R.string.hola_bienvenido, username), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.hola_bienvenido, username), Toast.LENGTH_SHORT)
+            .show()
 
         // Inicializar vistas
         spinnerPartidos = findViewById(R.id.spinnerPartidos)
@@ -254,8 +255,10 @@ class MainActivity : AppCompatActivity() {
         val saldo = findViewById<TextView>(R.id.textViewSaldo).text.toString().toFloat()
         enviarApuestaButton.setOnClickListener {
             if (partidoSeleccionado == null || montoApostado <= 0) {
-                Toast.makeText(this,
-                    getString(R.string.selecciona_un_partido_y_monto_v_lido), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    getString(R.string.selecciona_un_partido_y_monto_v_lido), Toast.LENGTH_SHORT
+                )
                     .show()
                 return@setOnClickListener
             }
@@ -265,13 +268,19 @@ class MainActivity : AppCompatActivity() {
                 momio2Button.isChecked -> partidoSeleccionado!!.momio2
                 momio3Button.isChecked -> partidoSeleccionado!!.momio3
                 else -> {
-                    Toast.makeText(this, getString(R.string.selecciona_un_momio), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.selecciona_un_momio),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
             }
-            if(apuestas.fold(0) { acc, apuesta -> acc + apuesta.monto } > saldo) {
-                Toast.makeText(this,
-                    getString(R.string.no_tienes_saldo_suficiente), Toast.LENGTH_SHORT).show()
+            if (apuestas.fold(0) { acc, apuesta -> acc + apuesta.monto } > saldo) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.no_tienes_saldo_suficiente), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             apuestas.add(Apuesta(partidoSeleccionado!!, momioSeleccionado, montoApostado))
@@ -305,7 +314,8 @@ class MainActivity : AppCompatActivity() {
                         apuesta.partido.equipo1,
                         apuesta.partido.equipo2,
                         ganador
-                    ))
+                    )
+                )
 
                 val momioGanador = when (resultadoAleatorio) {
                     1 -> apuesta.partido.momio1
@@ -329,6 +339,13 @@ class MainActivity : AppCompatActivity() {
             saldoTextView.text = saldo.toString()
             montoApostado = 0
             montoInput.text = montoApostado.toString()
+
+
+            // Guardar Saldo
+            val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
+            sharedPreferences.edit {
+                putFloat("saldo", saldo)
+            }
 
             // Deseleccionar momios
             momio1Button.isChecked = false

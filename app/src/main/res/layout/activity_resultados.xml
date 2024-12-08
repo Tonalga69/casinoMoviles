@@ -2,49 +2,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titleResultados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Resultados de los Partidos de la Liga"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/saldo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/titleResultados" />
 
     <TextView
         android:id="@+id/textViewGanado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dinero_ganado_0_0"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saldo" />
+        app:layout_constraintTop_toBottomOf="@id/saldo" />
 
     <TextView
         android:id="@+id/textViewPerdido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dinero_perdido_0_0"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGanado" />
+        app:layout_constraintTop_toBottomOf="@id/textViewGanado" />
 
-    <TextView
-        android:id="@+id/textViewResultados"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewResultados"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/resultados_de_los_partidos"
-        android:textSize="18sp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPerdido" />
+        app:layout_constraintTop_toBottomOf="@id/textViewPerdido" />
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="268dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewResultados" />
 </androidx.constraintlayout.widget.ConstraintLayout>
