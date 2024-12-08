@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var momio2Button: ToggleButton
     private lateinit var momio3Button: ToggleButton
     private val apuestas = mutableListOf<Apuesta>()
-
+    private lateinit var idUsuario: String
     private var montoApostado: Int = 0
 
 
@@ -57,12 +57,16 @@ class MainActivity : AppCompatActivity() {
 
 
         val isAdmin = intent.getBooleanExtra("isAdmin", false)
-        val idUsuario = intent.getStringExtra("IdUsuario")
+         idUsuario = intent.getStringExtra("IdUsuario") ?: ""
+
+        if (idUsuario.isEmpty()) {
+            val defaultSharedPreferences = getSharedPreferences("default", MODE_PRIVATE)
+            idUsuario = defaultSharedPreferences.getString("currentUserId", "") ?: ""
+        }
 
 
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
-
-        val username = sharedPreferences.getString("username", "")
+        val username = sharedPreferences.getString("nombre", "")
         val saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
         Toast.makeText(this, getString(R.string.hola_bienvenido, username), Toast.LENGTH_SHORT).show()
@@ -247,7 +251,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configurarBotonEnviarApuesta() {
         val enviarApuestaButton = findViewById<Button>(R.id.buttonEnviarApuesta)
-
+        val saldo = findViewById<TextView>(R.id.textViewSaldo).text.toString().toFloat()
         enviarApuestaButton.setOnClickListener {
             if (partidoSeleccionado == null || montoApostado <= 0) {
                 Toast.makeText(this,
@@ -265,7 +269,11 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-
+            if(apuestas.fold(0) { acc, apuesta -> acc + apuesta.monto } > saldo) {
+                Toast.makeText(this,
+                    getString(R.string.no_tienes_saldo_suficiente), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             apuestas.add(Apuesta(partidoSeleccionado!!, momioSeleccionado, montoApostado))
             Toast.makeText(this, getString(R.string.apuesta_guardada), Toast.LENGTH_SHORT).show()
         }
@@ -329,6 +337,7 @@ class MainActivity : AppCompatActivity() {
 
             // Mandar datos a ResultadosActivity
             val intent = Intent(this, ResultadosActivity::class.java)
+            intent.putExtra("idUser", idUsuario)
             intent.putExtra("dineroGanado", dineroGanado)
             intent.putExtra("dineroPerdido", dineroPerdido)
             intent.putExtra("saldo", saldo)

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Casino</string>
+    <string name="login">Login</string>
+    <string name="logintext">Log in</string>
+    <string name="nombre_de_usuario">Username:</string>
+    <string name="userName">Enter your name</string>
+    <string name="passwordtext">Password:</string>
+    <string name="password">Enter your password</string>
+    <string name="clean">Clean</string>
+    <string name="changeLanguage">No hablas inglés?, click aquí</string>
+    <string name="Noaccount">Don\'t have an account? Create one here</string>
+    <string name="registertext">Register</string>
+    <string name="register">Register</string>
+    <string name="goToLogin">Already have an account? Log in</string>
+    <string name="userOrPasswordIncorrect">Username or password incorrect</string>
+    <string name="userAlreadyRegistered">User already registered</string>
+    <string name="fillAllFields">Fill in all fields</string>
+    <string name="admin">Admin</string>
+    <string name="resetear">All balances</string>
+    <string name="reset">Reset</string>
+    <string name="advertencia">Warning: Balances cannot be recovered once reset.</string>
+    <string name="tragamonedas">Roulette</string>
+    <string name="aplicar">Apply</string>
+    <string name="administrar_momios">Manage odds</string>
+    <string name="irMomios">Odds</string>
+    <string name="updated_prob">Probability updated</string>
+    <string name="monto_apostado">Bet Amount</string>
+    <string name="ruleta">Roulette</string>
+    <string name="spin">Spin</string>
+    <string name="administrar_saldo">Manage balance</string>
+    <string name="saldo_actual">Current balance:</string>
+    <string name="agregar">Add</string>
+    <string name="imagen_de_administrar_saldo">balance management image</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="momios_liga_mx">Liga MX odds</string>
+    <string name="partido">Match:</string>
+    <string name="ajustar_momios">Adjust odds</string>
+    <string name="momio_a_favor_del_equipo_1">Odds in favor of team 1</string>
+    <string name="equipo_1">Team 1</string>
+    <string name="equipo_2">Team 2</string>
+    <string name="momio_a_favor_del_equipo_2">Odds in favor of team 2</string>
+    <string name="empate">Draw</string>
+    <string name="momio_para_empate">Odds for draw</string>
+    <string name="guardar">Save</string>
+    <string name="apuestele_pues">Place your bet…</string>
+    <string name="enviar_apuesta">Submit bet</string>
+    <string name="verificar_apuestas">Verify bets</string>
+    <string name="dinero_ganado_0_0">Money won: 0.0</string>
+    <string name="dinero_perdido_0_0">Money lost: 0.0</string>
+    <string name="resultados_de_los_partidos">Match results</string>
+    <string name="selecciona_un_partido_y_monto_v_lido">Select a valid match and amount</string>
+    <string name="selecciona_un_momio">Select an odd</string>
+    <string name="apuesta_guardada">Bet saved</string>
+    <string name="partido_vs_ganador">Match: %1$s vs %2$s - Winner: %3$s</string>
+    <string name="sin_resultado">No result</string>
+    <string name="hola_bienvenido">Hello, %1$s! Welcome 😊</string>
+    <string name="zero">0.0</string>
+    <string name="por_favor_ingresa_una_apuesta">Please enter a bet.</string>
+    <string name="ingresa_una_apuesta_v_lida">Enter a valid bet.</string>
+    <string name="no_tienes_suficiente_saldo">You don\'t have enough balance.</string>
+    <string name="saldo">Balance: %1$s</string>
+    <string name="dinero_ganado">Money won: %1$s</string>
+    <string name="dinero_perdido">Money lost: %1$s</string>
+    <string name="no_hubo_resultados">No results</string>
+    <string name="datos_guardados">Data saved</string>
+    <string name="ganaste">You won: %1$s</string>
+    <string name="no_tienes_saldo_suficiente">You don\'t have enough balance</string>
+    <string-array name="partidos_array">
+        <item>Chivas vs Atlas</item>
+        <item>América vs Pumas</item>
+    </string-array>
+</resources>

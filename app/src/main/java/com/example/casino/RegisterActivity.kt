@@ -62,6 +62,7 @@ class RegisterActivity : AppCompatActivity() {
             usuariosMutable.add(Json.encodeToString(UsuarioLoginData.serializer(), usuarioLoginData))
             sharedPreferences.edit {
                 putStringSet("usuarios", usuariosMutable)
+                putString("currentUserId", usuarioLoginData.idUsuario)
             }
             val userSharePrefences= getSharedPreferences(usuarioLoginData.idUsuario, MODE_PRIVATE)
             userSharePrefences.edit {

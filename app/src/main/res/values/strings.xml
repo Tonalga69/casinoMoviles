@@ -65,6 +65,7 @@
     <string name="no_hubo_resultados">No hubo resultados</string>
     <string name="datos_guardados">Datos guardados</string>
     <string name="ganaste">" Ganaste: %1$s"</string>
+    <string name="no_tienes_saldo_suficiente">No tienes saldo suficiente</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>
