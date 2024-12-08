@@ -43,6 +43,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MomiosAdminActivity" />
+        <activity android:name=".ResultadosActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
