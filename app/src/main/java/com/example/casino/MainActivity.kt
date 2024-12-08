@@ -2,6 +2,7 @@ package com.example.casino
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
@@ -20,6 +22,7 @@ import com.example.casino.models.Partido
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private var montoApostado: Int = 0
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         configurarBotonEnviarApuesta()
         configurarBotonVerificarApuestas()
 
+        // Boton de Admin
 
         val buttonAdmin = findViewById<Button>(R.id.buttonAdmin)
         if (!isAdmin) {
@@ -123,10 +128,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdminSaldosActivity::class.java)
             intent.putExtra("IdUsuario", idUsuario)
             intent.putExtra("isAdmin", isAdmin)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
 
+        // Boton de historial
+        val buttonHistorial = findViewById<Button>(R.id.buttonHistorial)
+        buttonHistorial.setOnClickListener {
+            val intent = Intent(this, HistorialActivity::class.java)
+            intent.putExtra("IdUsuario", idUsuario)
+            startActivity(intent)
+        }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
@@ -288,6 +299,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     private fun configurarBotonVerificarApuestas() {
         val verificarButton = findViewById<Button>(R.id.buttonVerificarApuestas)
@@ -346,6 +358,37 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.edit {
                 putFloat("saldo", saldo)
             }
+
+
+            // Historial
+
+            val historialSharedPreferences =
+                getSharedPreferences("${idUsuario}momios", MODE_PRIVATE)
+            val editor = historialSharedPreferences.edit()
+
+            val fechaActual = LocalDate.now().toString()
+            val nuevoRegistro =
+                "${fechaActual} | Dinero ganado: ${dineroGanado} | Dinero perdido: ${dineroPerdido}"
+
+            // Recupera el historial actual como una lista de strings
+            val historialActual = historialSharedPreferences.getString("historial", "") ?: ""
+            val historialList =
+                historialActual.split(";").filter { it.isNotBlank() }.toMutableList()
+
+            // Agrega el nuevo registro al inicio del historial
+            historialList.add(0, nuevoRegistro)
+
+            // Limita el historial a un número fijo de registros (opcional, por ejemplo, 50)
+            val maxRegistros = 50
+            if (historialList.size > maxRegistros) {
+                historialList.removeAt(historialList.size - 1)
+            }
+
+            // Guarda el historial actualizado en SharedPreferences
+            val historialConcatenado = historialList.joinToString(";")
+            editor.putString("historial", historialConcatenado)
+            editor.apply()
+
 
             // Deseleccionar momios
             momio1Button.isChecked = false

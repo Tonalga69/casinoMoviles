@@ -68,6 +68,7 @@
     <string name="no_tienes_saldo_suficiente">No tienes saldo suficiente</string>
     <string name="momios">Momios</string>
     <string name="saldoMenu">saldo</string>
+    <string name="historial">Historial</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>

@@ -17,8 +17,8 @@ import kotlinx.serialization.json.Json
 import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var nameEditText : EditText
-    lateinit var passwordEditText : EditText
+    lateinit var nameEditText: EditText
+    lateinit var passwordEditText: EditText
     lateinit var cleanButton: Button
     lateinit var loginButton: Button
     lateinit var goToRegisterButton: Button
@@ -33,6 +33,11 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+       
+
+
         setUpAdmin()
         nameEditText = findViewById(R.id.editTextUserName)
         passwordEditText = findViewById(R.id.editTextPassword)
@@ -64,8 +69,8 @@ class LoginActivity : AppCompatActivity() {
                 }
                 setLocale(this, "en")
             }
-            Toast.makeText(this, sharedPreferences.getString("idioma", "es"), Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(this, sharedPreferences.getString("idioma", "es"), Toast.LENGTH_SHORT)
+                .show()
 
 
         }
@@ -93,7 +98,8 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 return@OnClickListener
             }
-            Toast.makeText(this, getString(R.string.userOrPasswordIncorrect), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.userOrPasswordIncorrect), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -107,17 +113,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    private fun setUpAdmin(){
+    private fun setUpAdmin() {
         val sharedPreferences = getSharedPreferences("default", MODE_PRIVATE)
-        if (sharedPreferences.getStringSet("usuarios", mutableSetOf())!!.isEmpty()){
-            val stringJson= Json.encodeToString(UsuarioLoginData.serializer(), usuarioLoginData)
+        if (sharedPreferences.getStringSet("usuarios", mutableSetOf())!!.isEmpty()) {
+            val stringJson = Json.encodeToString(UsuarioLoginData.serializer(), usuarioLoginData)
             sharedPreferences.edit {
                 putStringSet("usuarios", mutableSetOf(stringJson))
             }
-            val userSharePrefences= getSharedPreferences(usuarioLoginData.idUsuario, MODE_PRIVATE)
+            val userSharePrefences = getSharedPreferences(usuarioLoginData.idUsuario, MODE_PRIVATE)
             userSharePrefences.edit {
                 putString("Idusuario", usuarioLoginData.idUsuario)
                 putString("nombre", usuarioLoginData.userName)
