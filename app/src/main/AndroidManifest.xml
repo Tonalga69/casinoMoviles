@@ -13,14 +13,21 @@
         android:theme="@style/Theme.Casino"
         tools:targetApi="31">
         <activity
+            android:name=".RouletteActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminSaldosActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".SaldoActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,12 +44,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MomiosAdminActivity" />
-        <activity android:name=".ResultadosActivity" />
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
-    <meta-data
-        android:name="preloaded_fonts"
-        android:resource="@array/preloaded_fonts" />
-
 </manifest>
