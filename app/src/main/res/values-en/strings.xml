@@ -66,6 +66,8 @@
     <string name="no_hubo_resultados">No results</string>
     <string name="datos_guardados">Data saved</string>
     <string name="ganaste">You won: %1$s</string>
+    <string name="momios">Odds</string>
+    <string name="saldoMenu">Balance</string>
     <string name="no_tienes_saldo_suficiente">You don\'t have enough balance</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
