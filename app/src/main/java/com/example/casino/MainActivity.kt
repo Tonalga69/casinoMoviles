@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         setUpMomios()
 
 
-        val isAdmin = intent.getBooleanExtra("isAdmin", false);
-        val idUsuario = intent.getStringExtra("IdUsuario");
+        val isAdmin = intent.getBooleanExtra("isAdmin", false)
+        val idUsuario = intent.getStringExtra("IdUsuario")
 
 
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val username = sharedPreferences.getString("username", "")
         val saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
-        Toast.makeText(this, "¡Hola, $username! Bienvenido 😊", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.hola_bienvenido, username), Toast.LENGTH_SHORT).show()
 
         // Inicializar vistas
         spinnerPartidos = findViewById(R.id.spinnerPartidos)
@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    @SuppressLint("SetTextI18n")
     private fun configurarBotonesMonto() {
         val incrementarButton = findViewById<Button>(R.id.buttonIncrementar)
         val decrementarButton = findViewById<Button>(R.id.buttonDecrementar)
@@ -250,7 +250,8 @@ class MainActivity : AppCompatActivity() {
 
         enviarApuestaButton.setOnClickListener {
             if (partidoSeleccionado == null || montoApostado <= 0) {
-                Toast.makeText(this, "Selecciona un partido y monto válido", Toast.LENGTH_SHORT)
+                Toast.makeText(this,
+                    getString(R.string.selecciona_un_partido_y_monto_v_lido), Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
@@ -260,13 +261,13 @@ class MainActivity : AppCompatActivity() {
                 momio2Button.isChecked -> partidoSeleccionado!!.momio2
                 momio3Button.isChecked -> partidoSeleccionado!!.momio3
                 else -> {
-                    Toast.makeText(this, "Selecciona un momio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.selecciona_un_momio), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
             }
 
             apuestas.add(Apuesta(partidoSeleccionado!!, momioSeleccionado, montoApostado))
-            Toast.makeText(this, "Apuesta guardada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.apuesta_guardada), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -286,11 +287,17 @@ class MainActivity : AppCompatActivity() {
                 val resultadoAleatorio = (1..3).random() // 1: equipo1, 2: empate, 3: equipo2
                 val ganador = when (resultadoAleatorio) {
                     1 -> apuesta.partido.equipo1
-                    2 -> "Empate"
+                    2 -> getString(R.string.empate)
                     3 -> apuesta.partido.equipo2
-                    else -> "Sin resultado"
+                    else -> getString(R.string.sin_resultado)
                 }
-                resultadosPartidos.add("Partido: ${apuesta.partido.equipo1} vs ${apuesta.partido.equipo2} - Ganador: $ganador")
+                resultadosPartidos.add(
+                    getString(
+                        R.string.partido_vs_ganador,
+                        apuesta.partido.equipo1,
+                        apuesta.partido.equipo2,
+                        ganador
+                    ))
 
                 val momioGanador = when (resultadoAleatorio) {
                     1 -> apuesta.partido.momio1

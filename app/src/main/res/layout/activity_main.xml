@@ -28,7 +28,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="40dp"
         android:text="@string/momios_liga_mx"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="348dp"
         android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -156,7 +156,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="388dp"
-        android:hint="@string/apuestele_pues"
+        android:hint="@string/zero"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

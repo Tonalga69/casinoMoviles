@@ -1,5 +1,6 @@
 package com.example.casino
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,10 +32,9 @@ class RouletteActivity : AppCompatActivity() {
         val isAdmin = intent.getBooleanExtra("isAdmin", false)
         val idUsuario = intent.getStringExtra("IdUsuario")
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
+
+
         var saldo = sharedPreferences.getFloat("saldo", 0.0f)
-
-
-        saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
         // Encuentra el tvSaldoR y actualiza el valor del saldo
         val saldoTextView = findViewById<TextView>(R.id.tvSaldoR)
@@ -57,6 +57,7 @@ class RouletteActivity : AppCompatActivity() {
         val btnPlusBet = findViewById<Button>(R.id.btnPlusBet)
 
         //Funcion para aumentar o disminuir mi editTextBet
+        @SuppressLint("SetTextI18n")
         fun updateBetValue(editText: EditText, increment: Int) {
             val currentBet = editText.text.toString().toIntOrNull()
                 ?: 0 // Valor actual, 0 si está vacío o inválido
@@ -81,20 +82,23 @@ class RouletteActivity : AppCompatActivity() {
             // Obtiene el texto ingresado en el EditText
             val betText = editTextBet.text.toString()
             if (betText.isEmpty()) {
-                Toast.makeText(this, "Por favor, ingresa una apuesta.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.por_favor_ingresa_una_apuesta), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             // Convierte la apuesta a Float
             val bet = betText.toFloatOrNull()
             if (bet == null || bet <= 0) {
-                Toast.makeText(this, "Ingresa una apuesta válida.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.ingresa_una_apuesta_v_lida), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             // Verifica que haya saldo suficiente
             if (bet > saldo) {
-                Toast.makeText(this, "No tienes suficiente saldo.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.no_tienes_suficiente_saldo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -125,7 +129,7 @@ class RouletteActivity : AppCompatActivity() {
                 // Muestra un mensaje con la ganancia y el multiplicador
                 Toast.makeText(
                     this,
-                    " Ganaste: $winnings",
+                    getString(R.string.ganaste, winnings),
                     Toast.LENGTH_LONG
                 ).show()
 

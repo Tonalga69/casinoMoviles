@@ -1,5 +1,6 @@
 package com.example.casino
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
@@ -7,6 +8,7 @@ import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 
 class ResultadosActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultados)
@@ -25,10 +27,10 @@ class ResultadosActivity : AppCompatActivity() {
         val videoView = findViewById<VideoView>(R.id.videoView)
 
         // Mostrar los resultados
-        textViewSaldo.text = "Saldo: $saldo"
-        textViewGanado.text = "Dinero ganado: $dineroGanado"
-        textViewPerdido.text = "Dinero perdido: $dineroPerdido"
-        textViewResultados.text = resultadosPartidos?.joinToString("\n") ?: "No hubo resultados"
+        textViewSaldo.text = getString(R.string.saldo, saldo.toString())
+        textViewGanado.text = getString(R.string.dinero_ganado, dineroGanado.toString())
+        textViewPerdido.text = getString(R.string.dinero_perdido, dineroPerdido.toString())
+        textViewResultados.text = resultadosPartidos?.joinToString("\n") ?: getString(R.string.no_hubo_resultados)
 
         // Configurar el video
         val videoUri = Uri.parse("android.resource://${packageName}/raw/tu_video")

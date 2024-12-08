@@ -9,6 +9,7 @@
 
     <!-- Dropdown para seleccionar el partido -->
     <ImageView
+        android:contentDescription="@string/ajustar_momios"
         android:id="@+id/imageView"
         android:layout_width="35dp"
         android:layout_height="28dp"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="8dp"
-        android:text="Ajustar Momios"
+        android:text="@string/ajustar_momios"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
