@@ -7,7 +7,7 @@
     <string name="passwordtext">Contraseña:</string>
     <string name="password">Ingresa tu contraseña</string>
     <string name="clean">Limpiar</string>
-    <string name="changeLanguage">Don\'t you speak English?, click here</string>
+    <string name="changeLanguage">Don\'t you speak Spanish?, click here</string>
     <string name="Noaccount">No tienes cuenta? Crea una aquí</string>
     <string name="registertext">Registro</string>
     <string name="register">Registrar</string>
@@ -16,14 +16,13 @@
     <string name="userAlreadyRegistered">Usuario ya registrado</string>
     <string name="fillAllFields">Llene todos los campos</string>
     <string name="admin">Admin</string>
-    <string name="resetear">Resetear todos los saldos</string>
+    <string name="resetear">Todos los saldos</string>
     <string name="reset">Reset</string>
-    <string name="advertencia">Advertencia: No se podrá recuperar \n los saldos una vez reiniciados.</string>
-    <string name="probabilidades">Probabilidades de ganar</string>
-    <string name="tragamonedas">Tragamonedas</string>
+    <string name="advertencia">Advertencia: No se podrá recuperar los saldos una vez reiniciados.</string>
+    <string name="tragamonedas">Ruleta</string>
     <string name="aplicar">Aplicar</string>
     <string name="administrar_momios">Administrar momios</string>
-    <string name="irMomios">Ir a momios</string>
+    <string name="irMomios">Momios</string>
     <string name="updated_prob">Probabilidad actualizada</string>
     <string name="momios_liga_mx">Momios liga MX</string>
     <string name="partido">Partido:</string>

@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/cormorant_infant</item>
         <item>@font/cormorant_unicase</item>
+        <item>@font/fraunces</item>
         <item>@font/jacques_francois_shadow</item>
     </array>
 </resources>

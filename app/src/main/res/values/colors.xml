@@ -7,7 +7,5 @@
     <color name="button_text_color">#040F00</color>
     <color name="link_text_color">#1E5E7E</color>
     <color name="edit_text_color">#5E000000</color>
-    <color name="colorSelected">#FF9800</color>
-    <color name="colorDeselected">#E0E0E0</color>
-
+    <color name="cardview_color">#49562A</color>
 </resources>
