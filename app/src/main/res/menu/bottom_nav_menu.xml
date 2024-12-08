@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/casino_fortuna__1__03_removebg_preview"
+        android:title="Momios" />
+    <item
+        android:id="@+id/nav_apuestas"
+        android:icon="@drawable/ruleta_icon"
+        android:title="Ruleta" />
+    <item
+        android:id="@+id/nav_saldo"
+        android:icon="@drawable/admin_saldo_icon"
+        android:title="Saldo" />
+</menu>

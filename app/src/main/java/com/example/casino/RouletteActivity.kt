@@ -1,5 +1,6 @@
 package com.example.casino
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class RouletteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,7 @@ class RouletteActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
         // Recupera datos del intent
         val isAdmin = intent.getBooleanExtra("isAdmin", false)
@@ -132,6 +135,41 @@ class RouletteActivity : AppCompatActivity() {
                 saldoTextView.text = saldo.toString()
                 sharedPreferences.edit().putFloat("saldo", saldo).apply()
 
+            }
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.nav_apuestas
+        // Configura la navegación
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("IdUsuario", idUsuario)
+                    intent.putExtra("isAdmin", isAdmin)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.nav_apuestas -> {
+
+                    bottomNavigationView.selectedItemId = R.id.nav_apuestas
+                    true
+                }
+
+                R.id.nav_saldo -> {
+
+                    val intent = Intent(this, SaldoActivity::class.java)
+                    intent.putExtra("IdUsuario", idUsuario)
+                    intent.putExtra("isAdmin", isAdmin)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
             }
         }
     }

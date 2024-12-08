@@ -17,6 +17,7 @@ import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.casino.models.Partido
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 
@@ -54,8 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         setUpMomios()
 
+
         val isAdmin = intent.getBooleanExtra("isAdmin", false);
         val idUsuario = intent.getStringExtra("IdUsuario");
+
 
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
 
@@ -119,6 +122,41 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.nav_home
+        // Configura la navegación
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Permanece en MainActivity
+                    bottomNavigationView.selectedItemId = R.id.nav_home
+                    true
+                }
+
+                R.id.nav_apuestas -> {
+                    val intent = Intent(this, RouletteActivity::class.java)
+                    intent.putExtra("IdUsuario", idUsuario)
+                    intent.putExtra("isAdmin", isAdmin)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+
+                    true
+                }
+
+                R.id.nav_saldo -> {
+                    val intent = Intent(this, SaldoActivity::class.java)
+                    intent.putExtra("IdUsuario", idUsuario)
+                    intent.putExtra("isAdmin", isAdmin)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 
     private fun setUpMomios() {
