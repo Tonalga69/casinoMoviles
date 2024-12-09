@@ -58,6 +58,7 @@
     <string name="hola_bienvenido">Hello, %1$s! Welcome 😊</string>
     <string name="zero">0.0</string>
     <string name="por_favor_ingresa_una_apuesta">Please enter a bet.</string>
+    <string name="resultados_de_los_partidos_de_la_liga"> Liga MX Match Results</string>
     <string name="ingresa_una_apuesta_v_lida">Enter a valid bet.</string>
     <string name="no_tienes_suficiente_saldo">You don\'t have enough balance.</string>
     <string name="saldo">Balance: %1$s</string>
@@ -73,6 +74,8 @@
     <string name="no_tienes_saldo_suficiente">You don\'t have enough balance</string>
     <string name="monto_excede_saldo">The amount exceeds the balance</string>
     <string name="monto_no_negativo">The amount cannot be negative</string>
+    <string name="equipos">Teams</string>
+    <string name="borrar_historial">Clean history</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>

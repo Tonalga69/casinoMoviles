@@ -11,12 +11,12 @@ class HistorialAdapter(private val historialList: List<String>) :
 
     // ViewHolder para manejar cada elemento del RecyclerView
     class HistorialViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtRegistro: TextView = itemView.findViewById(android.R.id.text1)
+        val txtRegistro: TextView = itemView.findViewById(R.id.textviewResult)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistorialViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(android.R.layout.simple_list_item_1, parent, false)
+            .inflate(R.layout.history_list_item, parent, false)
         return HistorialViewHolder(view)
     }
 
