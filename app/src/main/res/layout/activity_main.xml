@@ -44,12 +44,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonHistorial"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginTop="500dp"
-        android:text="@string/historial" />
 
     <Button
         android:id="@+id/buttonAdmin"

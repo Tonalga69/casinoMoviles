@@ -42,6 +42,17 @@ class SaldoActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_saldo
+
+
+        // Boton de historial Test
+        val buttonHistorial = findViewById<Button>(R.id.buttonHistorial)
+        buttonHistorial.setOnClickListener {
+            val intent = Intent(this, HistorialActivity::class.java)
+            intent.putExtra("IdUsuario", idUsuario)
+            startActivity(intent)
+        }
+
+        bottomNavigationView.selectedItemId = R.id.nav_saldo
         // Configura la navegación
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {

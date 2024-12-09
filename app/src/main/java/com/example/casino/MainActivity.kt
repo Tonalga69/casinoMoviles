@@ -130,13 +130,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Boton de historial
-        val buttonHistorial = findViewById<Button>(R.id.buttonHistorial)
-        buttonHistorial.setOnClickListener {
-            val intent = Intent(this, HistorialActivity::class.java)
-            intent.putExtra("IdUsuario", idUsuario)
-            startActivity(intent)
-        }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
