@@ -84,7 +84,7 @@
             android:id="@+id/txtBackground"
             android:layout_width="200dp"
             android:layout_height="72dp"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/edit_text_background"
             android:backgroundTint="@color/cardview_color"
