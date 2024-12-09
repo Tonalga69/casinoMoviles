@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.time.LocalDate
 
 class RouletteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,28 +78,32 @@ class RouletteActivity : AppCompatActivity() {
         videoView.setBackgroundResource(R.drawable.ruleta_inicio)
         // Configura el botón btnSpin
         btnSpin.setOnClickListener {
-
-
             // Obtiene el texto ingresado en el EditText
             val betText = editTextBet.text.toString()
             if (betText.isEmpty()) {
-                Toast.makeText(this,
-                    getString(R.string.por_favor_ingresa_una_apuesta), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.por_favor_ingresa_una_apuesta), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             // Convierte la apuesta a Float
             val bet = betText.toFloatOrNull()
             if (bet == null || bet <= 0) {
-                Toast.makeText(this,
-                    getString(R.string.ingresa_una_apuesta_v_lida), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.ingresa_una_apuesta_v_lida), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             // Verifica que haya saldo suficiente
             if (bet > saldo) {
-                Toast.makeText(this,
-                    getString(R.string.no_tienes_suficiente_saldo), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.no_tienes_suficiente_saldo), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -111,20 +116,16 @@ class RouletteActivity : AppCompatActivity() {
             videoView.setVideoURI(videoUri)
             videoView.setOnPreparedListener {
                 it.isLooping = false // No se repite
-                videoView.start()
-            }
-            //
-            videoView.setOnPreparedListener {
-                // Quitar el color de fondo cuando el video comienza
-                videoView.setBackgroundColor(android.graphics.Color.TRANSPARENT) // Quita el fondo
-                it.isLooping = false // No se repite
                 videoView.start() // Inicia el video
-
             }
-            // Multiplica la apuesta por un número segun el video
+
+            // Asegúrate de que el fondo desaparezca cuando empieza el video
+            videoView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+
+            // Multiplica la apuesta por un número según el video
             val winnings = bet * multiplier
 
-            //538.9
+            // Configura las acciones al finalizar el video
             videoView.setOnCompletionListener {
                 // Muestra un mensaje con la ganancia y el multiplicador
                 Toast.makeText(
@@ -133,12 +134,41 @@ class RouletteActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
 
+                // Cambia el fondo cuando se termina el video
                 videoView.setBackgroundResource(R.drawable.ruleta_ganador)
 
-                saldo += winnings
+                // Actualiza el saldo
+                saldo += winnings - bet
                 saldoTextView.text = saldo.toString()
+
+                // Guarda el nuevo saldo
                 sharedPreferences.edit().putFloat("saldo", saldo).apply()
 
+                // Guarda el historial con el nuevo registro
+                val historialSharedPreferences =
+                    getSharedPreferences("${idUsuario}momios", MODE_PRIVATE)
+                val editor = historialSharedPreferences.edit()
+
+                val fechaActual = LocalDate.now().toString()
+                val nuevoRegistro =
+                    "${fechaActual} | Apuesta: ${bet} | Multiplicador: ${multiplier} | Ganancia: ${winnings}"
+
+                // Recupera el historial actual y agrega el nuevo registro
+                val historialActual = historialSharedPreferences.getString("historial", "") ?: ""
+                val historialList =
+                    historialActual.split(";").filter { it.isNotBlank() }.toMutableList()
+                historialList.add(0, nuevoRegistro)
+
+                // Limita el historial a un número fijo de registros
+                val maxRegistros = 50
+                if (historialList.size > maxRegistros) {
+                    historialList.removeAt(historialList.size - 1)
+                }
+
+                // Guarda el historial actualizado en SharedPreferences
+                val historialConcatenado = historialList.joinToString(";")
+                editor.putString("historial", historialConcatenado)
+                editor.apply()
             }
         }
 
