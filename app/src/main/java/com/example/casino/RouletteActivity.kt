@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
 
 class RouletteActivity : AppCompatActivity() {
+    @SuppressLint("NewApi", "StringFormatMatches")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -108,7 +109,23 @@ class RouletteActivity : AppCompatActivity() {
             }
 
             // Selecciona un video aleatorio y obtiene su multiplicador
-            val randomVideo = videos.random()
+            var randomVideo = videos.random()
+            if(getSharedPreferences("Default", MODE_PRIVATE)
+                .getFloat("tragamonedas", 50.0f)>60){
+               randomVideo = listOf(
+                   Pair(R.raw.video2, 2.2f),
+                   Pair(R.raw.video5, 5.8f)).random()
+            }
+            if(getSharedPreferences("Default", MODE_PRIVATE)
+                    .getFloat("tragamonedas", 50.0f)<20){
+                randomVideo = listOf(
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video3, 1.1f),
+                   ).random()
+            }
             val videoUri = Uri.parse("android.resource://$packageName/${randomVideo.first}")
             val multiplier = randomVideo.second
 
@@ -128,11 +145,7 @@ class RouletteActivity : AppCompatActivity() {
             // Configura las acciones al finalizar el video
             videoView.setOnCompletionListener {
                 // Muestra un mensaje con la ganancia y el multiplicador
-                Toast.makeText(
-                    this,
-                    getString(R.string.ganaste, winnings),
-                    Toast.LENGTH_LONG
-                ).show()
+
 
                 // Cambia el fondo cuando se termina el video
                 videoView.setBackgroundResource(R.drawable.ruleta_ganador)
@@ -151,7 +164,13 @@ class RouletteActivity : AppCompatActivity() {
 
                 val fechaActual = LocalDate.now().toString()
                 val nuevoRegistro =
-                    "${fechaActual} | Apuesta: ${bet} | Multiplicador: ${multiplier} | Ganancia: ${winnings}"
+                    getString(
+                        R.string.apuesta_multiplicador_ganancia,
+                        fechaActual,
+                        bet,
+                        multiplier,
+                        winnings
+                    )
 
                 // Recupera el historial actual y agrega el nuevo registro
                 val historialActual = historialSharedPreferences.getString("historial", "") ?: ""

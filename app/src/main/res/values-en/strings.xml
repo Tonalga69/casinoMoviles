@@ -61,7 +61,9 @@
     <string name="ingresa_una_apuesta_v_lida">Enter a valid bet.</string>
     <string name="no_tienes_suficiente_saldo">You don\'t have enough balance.</string>
     <string name="saldo">Balance: %1$s</string>
+    <string name="historial">history</string>
     <string name="dinero_ganado">Money won: %1$s</string>
+    <string name="apuesta_multiplicador_ganancia">%1$s | bet: %2$s | Multiplier: %3$s | earnings: %4$s</string>
     <string name="dinero_perdido">Money lost: %1$s</string>
     <string name="no_hubo_resultados">No results</string>
     <string name="datos_guardados">Data saved</string>
