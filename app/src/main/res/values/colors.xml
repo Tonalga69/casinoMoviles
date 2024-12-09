@@ -12,7 +12,7 @@
     <color name="colorDeselected">#E0E0E0</color>
     <color name="nav_item_selector">#E1E6C6</color>
     <color name="indicator_color">#5DE1E6C6</color>
-
+    <color name="main_color">#CEE6B4</color>
     <color name="nav_background">#49562A</color>
 
 </resources>
