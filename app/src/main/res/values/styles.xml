@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Define the status bar color -->
+        <item name="android:statusBarColor">@color/background_color</item>
+
+        <!-- Optional: Use light status bar icons -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="CustomActiveIndicator" parent="">
+        <item name="android:color">@color/indicator_color</item>
+        <item name="android:height">32dp</item>
+        <item name="android:width">32dp</item>
+        <item name="android:shape">oval</item>
+    </style>
+
+</resources>
