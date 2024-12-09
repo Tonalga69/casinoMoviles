@@ -59,14 +59,19 @@
             android:id="@+id/btnSpin"
             android:layout_width="92dp"
             android:layout_height="94dp"
+            android:backgroundTint="@color/button_color"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="36dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/jacques_francois_shadow"
+            android:textSize="14sp"
             android:text="@string/spin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/videoView" />
 
         <TextView
             android:id="@+id/txtMontoApostado"
+            android:fontFamily="@font/cormorant_unicase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -77,19 +82,24 @@
 
         <TextView
             android:id="@+id/txtBackground"
-            android:layout_width="189dp"
+            android:layout_width="200dp"
             android:layout_height="72dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
-            android:background="#673AB7"
+            android:background="@drawable/edit_text_background"
+            android:backgroundTint="@color/cardview_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtMontoApostado" />
 
         <Button
             android:id="@+id/btnMinusBet"
+            android:layout_marginLeft="5dp"
             android:layout_width="51dp"
             android:layout_height="53dp"
+            android:backgroundTint="@color/white"
             android:text="-"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBackground"
             app:layout_constraintStart_toStartOf="@id/txtBackground"
             app:layout_constraintTop_toTopOf="@id/txtBackground" />
 
@@ -98,8 +108,12 @@
             android:id="@+id/editTextBet"
             android:layout_width="68dp"
             android:layout_height="46dp"
+            android:gravity="center"
+            android:background="@drawable/edit_text_background"
             android:inputType="number"
-            app:layout_constraintStart_toEndOf="@id/btnMinusBet"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBackground"
+            app:layout_constraintEnd_toEndOf="@+id/txtBackground"
+            app:layout_constraintStart_toStartOf="@+id/txtBackground"
             app:layout_constraintTop_toTopOf="@id/txtBackground" />
 
         <!-- Botón sumar apuesta -->
@@ -107,7 +121,11 @@
             android:id="@+id/btnPlusBet"
             android:layout_width="51dp"
             android:layout_height="53dp"
+            android:backgroundTint="@color/white"
             android:text="+"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBackground"
             app:layout_constraintEnd_toEndOf="@id/txtBackground"
             app:layout_constraintTop_toTopOf="@id/txtBackground" />
 

@@ -254,6 +254,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="5dp"
+            android:gravity="center"
             android:background="@drawable/roundedmain_view"
             android:fontFamily="@font/cormorant_unicase"
             android:hint="@string/apuestele_pues"
