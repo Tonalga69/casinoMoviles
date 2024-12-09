@@ -71,7 +71,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="165dp"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
         android:backgroundTint="@color/cardview_color"
         app:cardCornerRadius="30dp"
@@ -79,14 +79,14 @@
         android:layout_marginTop="95dp">
 
         <View
-            android:layout_width="145dp"
+            android:layout_width="wrap_content"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/rounded_view" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical">
@@ -117,7 +117,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:backgroundTint="@color/main_color"
         app:cardCornerRadius="50dp"
@@ -255,6 +255,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="5dp"
+            android:gravity="center"
             android:background="@drawable/roundedmain_view"
             android:fontFamily="@font/cormorant_unicase"
             android:hint="@string/apuestele_pues"
