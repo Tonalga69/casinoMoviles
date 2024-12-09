@@ -69,6 +69,7 @@
     <string name="momios">Momios</string>
     <string name="saldoMenu">saldo</string>
     <string name="historial">Historial</string>
+    <string name="apuesta_multiplicador_ganancia">%1$s | Apuesta: %2$s | Multiplicador: %3$s | Ganancia: %4$s</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>
