@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         configurarToggleButtons()
-        configurarBotonesMonto()
         configurarBotonEnviarApuesta()
         configurarBotonVerificarApuestas()
 
@@ -141,6 +140,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
+
         // Configura la navegación
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -173,6 +173,33 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        //configurarBotonesMonto
+        val incrementarButton = findViewById<Button>(R.id.buttonIncrementar)
+        val decrementarButton = findViewById<Button>(R.id.buttonDecrementar)
+        val montoInput = findViewById<TextView>(R.id.montoApostadoInput)
+
+        incrementarButton.setOnClickListener {
+            val newSaldo = findViewById<TextView>(R.id.textViewSaldo).text.toString().toFloat()
+            if (montoApostado + 10 > newSaldo) {
+                Toast.makeText(this, getString(R.string.monto_excede_saldo), Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            montoApostado += 10
+            montoInput.text = montoApostado.toString()
+        }
+        decrementarButton.setOnClickListener {
+            if (montoApostado - 10 < 0) {
+                Toast.makeText(this, getString(R.string.monto_no_negativo), Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            montoApostado -= 10
+            montoInput.text = montoApostado.toString()
+        }
+
+
     }
 
     private fun setUpMomios() {
@@ -242,24 +269,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun configurarBotonesMonto() {
-        val incrementarButton = findViewById<Button>(R.id.buttonIncrementar)
-        val decrementarButton = findViewById<Button>(R.id.buttonDecrementar)
-        val montoInput = findViewById<TextView>(R.id.montoApostadoInput)
-
-        incrementarButton.setOnClickListener {
-            montoApostado += 10
-            montoInput.text = montoApostado.toString()
-        }
-
-        decrementarButton.setOnClickListener {
-            if (montoApostado >= 10) {
-                montoApostado -= 10
-                montoInput.text = montoApostado.toString()
-            }
-        }
-    }
 
     private fun configurarBotonEnviarApuesta() {
         val enviarApuestaButton = findViewById<Button>(R.id.buttonEnviarApuesta)
@@ -339,13 +348,16 @@ class MainActivity : AppCompatActivity() {
                 if (momioGanador == apuesta.momioSeleccionado) {
                     val ganancia = apuesta.monto * apuesta.momioSeleccionado
                     dineroGanado += ganancia
+
                     saldo += ganancia
+
                 } else {
                     dineroPerdido += apuesta.monto
                     saldo -= apuesta.monto
                 }
             }
 
+            saldo = if (saldo < 0) 0.0f else saldo
             // Limpiar apuestas y restablecer UI
             apuestas.clear()
             saldoTextView.text = saldo.toString()
