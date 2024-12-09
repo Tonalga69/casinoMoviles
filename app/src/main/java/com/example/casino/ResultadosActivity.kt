@@ -1,45 +1,54 @@
 package com.example.casino
 
-import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class ResultadosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultados)
 
-        // Obtener los datos enviados
         val dineroGanado = intent.getFloatExtra("dineroGanado", 0.0f)
         val dineroPerdido = intent.getFloatExtra("dineroPerdido", 0.0f)
         val saldo = intent.getFloatExtra("saldo", 0.0f)
-        val resultadosPartidos = intent.getStringArrayListExtra("resultadosPartidos")
+        val resultadosPartidos =
+            intent.getStringArrayListExtra("resultadosPartidos") ?: arrayListOf()
 
-        // Referenciar los TextViews
         val textViewGanado = findViewById<TextView>(R.id.textViewGanado)
         val textViewPerdido = findViewById<TextView>(R.id.textViewPerdido)
-        val textViewResultados = findViewById<TextView>(R.id.textViewResultados)
         val textViewSaldo = findViewById<TextView>(R.id.saldo)
-        val videoView = findViewById<VideoView>(R.id.videoView)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewResultados)
 
-        // Mostrar los resultados
-        textViewSaldo.text = "Saldo: $saldo"
-        textViewGanado.text = "Dinero ganado: $dineroGanado"
-        textViewPerdido.text = "Dinero perdido: $dineroPerdido"
-        textViewResultados.text = resultadosPartidos?.joinToString("\n") ?: "No hubo resultados"
+        textViewSaldo.text = getString(R.string.saldo, saldo.toString())
+        textViewGanado.text = getString(R.string.dinero_ganado, dineroGanado.toString())
+        textViewPerdido.text = getString(R.string.dinero_perdido, dineroPerdido.toString())
 
-        // Configurar el video
-        val videoUri = Uri.parse("android.resource://${packageName}/raw/tu_video")
-        videoView.setVideoURI(videoUri)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = ResultadosAdapter(resultadosPartidos)
 
-        // Silenciar el video
-        videoView.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.setVolume(0f, 0f)
-        }
 
-        // Reproducir el video
-        videoView.start()
     }
+}
+
+class ResultadosAdapter(private val resultados: List<String>) :
+    RecyclerView.Adapter<ResultadosAdapter.ViewHolder>() {
+    class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
+
+    override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): ViewHolder {
+        val textView = android.widget.TextView(parent.context).apply {
+            textSize = 18f
+            setPadding(8, 8, 8, 8)
+        }
+        return ViewHolder(textView)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.textView.text = resultados[position]
+    }
+
+    override fun getItemCount(): Int = resultados.size
 }

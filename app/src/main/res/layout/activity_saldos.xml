@@ -22,6 +22,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/buttonHistorial"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_marginStart="152dp"
+            android:layout_marginTop="552dp"
+            android:text="@string/historial"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/titulosaldo"
             android:layout_width="140dp"
@@ -102,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/nav_background"
+        app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
         app:itemIconTint="@color/nav_item_selector"
         app:itemTextColor="@color/nav_item_selector"
         app:menu="@menu/bottom_nav_menu" />

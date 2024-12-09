@@ -2,6 +2,7 @@ package com.example.casino
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
@@ -20,6 +22,7 @@ import com.example.casino.models.Partido
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,10 +41,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var momio2Button: ToggleButton
     private lateinit var momio3Button: ToggleButton
     private val apuestas = mutableListOf<Apuesta>()
-
+    private lateinit var idUsuario: String
     private var montoApostado: Int = 0
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,16 +60,21 @@ class MainActivity : AppCompatActivity() {
         setUpMomios()
 
 
-        val isAdmin = intent.getBooleanExtra("isAdmin", false);
-        val idUsuario = intent.getStringExtra("IdUsuario");
+        val isAdmin = intent.getBooleanExtra("isAdmin", false)
+        idUsuario = intent.getStringExtra("IdUsuario") ?: ""
+
+        if (idUsuario.isEmpty()) {
+            val defaultSharedPreferences = getSharedPreferences("default", MODE_PRIVATE)
+            idUsuario = defaultSharedPreferences.getString("currentUserId", "") ?: ""
+        }
 
 
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
-
-        val username = sharedPreferences.getString("username", "")
+        val username = sharedPreferences.getString("nombre", "")
         val saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
-        Toast.makeText(this, "¡Hola, $username! Bienvenido 😊", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.hola_bienvenido, username), Toast.LENGTH_SHORT)
+            .show()
 
         // Inicializar vistas
         spinnerPartidos = findViewById(R.id.spinnerPartidos)
@@ -105,10 +114,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         configurarToggleButtons()
-        configurarBotonesMonto()
         configurarBotonEnviarApuesta()
         configurarBotonVerificarApuestas()
 
+        // Boton de Admin
 
         val buttonAdmin = findViewById<Button>(R.id.buttonAdmin)
         if (!isAdmin) {
@@ -118,13 +127,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdminSaldosActivity::class.java)
             intent.putExtra("IdUsuario", idUsuario)
             intent.putExtra("isAdmin", isAdmin)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
 
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
+
         // Configura la navegación
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -157,6 +166,33 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        //configurarBotonesMonto
+        val incrementarButton = findViewById<Button>(R.id.buttonIncrementar)
+        val decrementarButton = findViewById<Button>(R.id.buttonDecrementar)
+        val montoInput = findViewById<TextView>(R.id.montoApostadoInput)
+
+        incrementarButton.setOnClickListener {
+            val newSaldo = findViewById<TextView>(R.id.textViewSaldo).text.toString().toFloat()
+            if (montoApostado + 10 > newSaldo) {
+                Toast.makeText(this, getString(R.string.monto_excede_saldo), Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            montoApostado += 10
+            montoInput.text = montoApostado.toString()
+        }
+        decrementarButton.setOnClickListener {
+            if (montoApostado - 10 < 0) {
+                Toast.makeText(this, getString(R.string.monto_no_negativo), Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            montoApostado -= 10
+            montoInput.text = montoApostado.toString()
+        }
+
+
     }
 
     private fun setUpMomios() {
@@ -227,30 +263,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun configurarBotonesMonto() {
-        val incrementarButton = findViewById<Button>(R.id.buttonIncrementar)
-        val decrementarButton = findViewById<Button>(R.id.buttonDecrementar)
-        val montoInput = findViewById<TextView>(R.id.montoApostadoInput)
-
-        incrementarButton.setOnClickListener {
-            montoApostado += 10
-            montoInput.text = montoApostado.toString()
-        }
-
-        decrementarButton.setOnClickListener {
-            if (montoApostado >= 10) {
-                montoApostado -= 10
-                montoInput.text = montoApostado.toString()
-            }
-        }
-    }
-
     private fun configurarBotonEnviarApuesta() {
         val enviarApuestaButton = findViewById<Button>(R.id.buttonEnviarApuesta)
-
+        val saldo = findViewById<TextView>(R.id.textViewSaldo).text.toString().toFloat()
         enviarApuestaButton.setOnClickListener {
             if (partidoSeleccionado == null || montoApostado <= 0) {
-                Toast.makeText(this, "Selecciona un partido y monto válido", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    getString(R.string.selecciona_un_partido_y_monto_v_lido), Toast.LENGTH_SHORT
+                )
                     .show()
                 return@setOnClickListener
             }
@@ -260,16 +281,27 @@ class MainActivity : AppCompatActivity() {
                 momio2Button.isChecked -> partidoSeleccionado!!.momio2
                 momio3Button.isChecked -> partidoSeleccionado!!.momio3
                 else -> {
-                    Toast.makeText(this, "Selecciona un momio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.selecciona_un_momio),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
             }
-
+            if (apuestas.fold(0) { acc, apuesta -> acc + apuesta.monto } > saldo) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.no_tienes_saldo_suficiente), Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             apuestas.add(Apuesta(partidoSeleccionado!!, momioSeleccionado, montoApostado))
-            Toast.makeText(this, "Apuesta guardada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.apuesta_guardada), Toast.LENGTH_SHORT).show()
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     private fun configurarBotonVerificarApuestas() {
         val verificarButton = findViewById<Button>(R.id.buttonVerificarApuestas)
@@ -286,11 +318,18 @@ class MainActivity : AppCompatActivity() {
                 val resultadoAleatorio = (1..3).random() // 1: equipo1, 2: empate, 3: equipo2
                 val ganador = when (resultadoAleatorio) {
                     1 -> apuesta.partido.equipo1
-                    2 -> "Empate"
+                    2 -> getString(R.string.empate)
                     3 -> apuesta.partido.equipo2
-                    else -> "Sin resultado"
+                    else -> getString(R.string.sin_resultado)
                 }
-                resultadosPartidos.add("Partido: ${apuesta.partido.equipo1} vs ${apuesta.partido.equipo2} - Ganador: $ganador")
+                resultadosPartidos.add(
+                    getString(
+                        R.string.partido_vs_ganador,
+                        apuesta.partido.equipo1,
+                        apuesta.partido.equipo2,
+                        ganador
+                    )
+                )
 
                 val momioGanador = when (resultadoAleatorio) {
                     1 -> apuesta.partido.momio1
@@ -302,18 +341,59 @@ class MainActivity : AppCompatActivity() {
                 if (momioGanador == apuesta.momioSeleccionado) {
                     val ganancia = apuesta.monto * apuesta.momioSeleccionado
                     dineroGanado += ganancia
+
                     saldo += ganancia
+
                 } else {
                     dineroPerdido += apuesta.monto
                     saldo -= apuesta.monto
                 }
             }
 
+            saldo = if (saldo < 0) 0.0f else saldo
             // Limpiar apuestas y restablecer UI
             apuestas.clear()
             saldoTextView.text = saldo.toString()
             montoApostado = 0
             montoInput.text = montoApostado.toString()
+
+
+            // Guardar Saldo
+            val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
+            sharedPreferences.edit {
+                putFloat("saldo", saldo)
+            }
+
+
+            // Historial
+
+            val historialSharedPreferences =
+                getSharedPreferences("${idUsuario}momios", MODE_PRIVATE)
+            val editor = historialSharedPreferences.edit()
+
+            val fechaActual = LocalDate.now().toString()
+            val nuevoRegistro =
+                "${fechaActual} | Dinero ganado: ${dineroGanado} | Dinero perdido: ${dineroPerdido}"
+
+            // Recupera el historial actual como una lista de strings
+            val historialActual = historialSharedPreferences.getString("historial", "") ?: ""
+            val historialList =
+                historialActual.split(";").filter { it.isNotBlank() }.toMutableList()
+
+            // Agrega el nuevo registro al inicio del historial
+            historialList.add(0, nuevoRegistro)
+
+            // Limita el historial a un número fijo de registros (opcional, por ejemplo, 50)
+            val maxRegistros = 50
+            if (historialList.size > maxRegistros) {
+                historialList.removeAt(historialList.size - 1)
+            }
+
+            // Guarda el historial actualizado en SharedPreferences
+            val historialConcatenado = historialList.joinToString(";")
+            editor.putString("historial", historialConcatenado)
+            editor.apply()
+
 
             // Deseleccionar momios
             momio1Button.isChecked = false
@@ -322,6 +402,7 @@ class MainActivity : AppCompatActivity() {
 
             // Mandar datos a ResultadosActivity
             val intent = Intent(this, ResultadosActivity::class.java)
+            intent.putExtra("idUser", idUsuario)
             intent.putExtra("dineroGanado", dineroGanado)
             intent.putExtra("dineroPerdido", dineroPerdido)
             intent.putExtra("saldo", saldo)

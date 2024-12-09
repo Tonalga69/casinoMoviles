@@ -1,5 +1,6 @@
 package com.example.casino
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.time.LocalDate
 
 class RouletteActivity : AppCompatActivity() {
+    @SuppressLint("NewApi", "StringFormatMatches")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,10 +34,9 @@ class RouletteActivity : AppCompatActivity() {
         val isAdmin = intent.getBooleanExtra("isAdmin", false)
         val idUsuario = intent.getStringExtra("IdUsuario")
         val sharedPreferences = getSharedPreferences(idUsuario, MODE_PRIVATE)
+
+
         var saldo = sharedPreferences.getFloat("saldo", 0.0f)
-
-
-        saldo = sharedPreferences.getFloat("saldo", 0.0f)
 
         // Encuentra el tvSaldoR y actualiza el valor del saldo
         val saldoTextView = findViewById<TextView>(R.id.tvSaldoR)
@@ -57,6 +59,7 @@ class RouletteActivity : AppCompatActivity() {
         val btnPlusBet = findViewById<Button>(R.id.btnPlusBet)
 
         //Funcion para aumentar o disminuir mi editTextBet
+        @SuppressLint("SetTextI18n")
         fun updateBetValue(editText: EditText, increment: Int) {
             val currentBet = editText.text.toString().toIntOrNull()
                 ?: 0 // Valor actual, 0 si está vacío o inválido
@@ -76,30 +79,53 @@ class RouletteActivity : AppCompatActivity() {
         videoView.setBackgroundResource(R.drawable.ruleta_inicio)
         // Configura el botón btnSpin
         btnSpin.setOnClickListener {
-
-
             // Obtiene el texto ingresado en el EditText
             val betText = editTextBet.text.toString()
             if (betText.isEmpty()) {
-                Toast.makeText(this, "Por favor, ingresa una apuesta.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.por_favor_ingresa_una_apuesta), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             // Convierte la apuesta a Float
             val bet = betText.toFloatOrNull()
             if (bet == null || bet <= 0) {
-                Toast.makeText(this, "Ingresa una apuesta válida.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.ingresa_una_apuesta_v_lida), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             // Verifica que haya saldo suficiente
             if (bet > saldo) {
-                Toast.makeText(this, "No tienes suficiente saldo.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.no_tienes_suficiente_saldo), Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             // Selecciona un video aleatorio y obtiene su multiplicador
-            val randomVideo = videos.random()
+            var randomVideo = videos.random()
+            if(getSharedPreferences("Default", MODE_PRIVATE)
+                .getFloat("tragamonedas", 50.0f)>60){
+               randomVideo = listOf(
+                   Pair(R.raw.video2, 2.2f),
+                   Pair(R.raw.video5, 5.8f)).random()
+            }
+            if(getSharedPreferences("Default", MODE_PRIVATE)
+                    .getFloat("tragamonedas", 50.0f)<20){
+                randomVideo = listOf(
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video4, 0.4f),
+                    Pair(R.raw.video3, 1.1f),
+                   ).random()
+            }
             val videoUri = Uri.parse("android.resource://$packageName/${randomVideo.first}")
             val multiplier = randomVideo.second
 
@@ -107,34 +133,61 @@ class RouletteActivity : AppCompatActivity() {
             videoView.setVideoURI(videoUri)
             videoView.setOnPreparedListener {
                 it.isLooping = false // No se repite
-                videoView.start()
-            }
-            //
-            videoView.setOnPreparedListener {
-                // Quitar el color de fondo cuando el video comienza
-                videoView.setBackgroundColor(android.graphics.Color.TRANSPARENT) // Quita el fondo
-                it.isLooping = false // No se repite
                 videoView.start() // Inicia el video
-
             }
-            // Multiplica la apuesta por un número segun el video
+
+            // Asegúrate de que el fondo desaparezca cuando empieza el video
+            videoView.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+
+            // Multiplica la apuesta por un número según el video
             val winnings = bet * multiplier
 
-            //538.9
+            // Configura las acciones al finalizar el video
             videoView.setOnCompletionListener {
                 // Muestra un mensaje con la ganancia y el multiplicador
-                Toast.makeText(
-                    this,
-                    " Ganaste: $winnings",
-                    Toast.LENGTH_LONG
-                ).show()
 
+
+                // Cambia el fondo cuando se termina el video
                 videoView.setBackgroundResource(R.drawable.ruleta_ganador)
 
-                saldo += winnings
+                // Actualiza el saldo
+                saldo += winnings - bet
                 saldoTextView.text = saldo.toString()
+
+                // Guarda el nuevo saldo
                 sharedPreferences.edit().putFloat("saldo", saldo).apply()
 
+                // Guarda el historial con el nuevo registro
+                val historialSharedPreferences =
+                    getSharedPreferences("${idUsuario}momios", MODE_PRIVATE)
+                val editor = historialSharedPreferences.edit()
+
+                val fechaActual = LocalDate.now().toString()
+                val nuevoRegistro =
+                    getString(
+                        R.string.apuesta_multiplicador_ganancia,
+                        fechaActual,
+                        bet,
+                        multiplier,
+                        winnings
+                    )
+
+                // Recupera el historial actual y agrega el nuevo registro
+                val historialActual = historialSharedPreferences.getString("historial", "") ?: ""
+                val historialList =
+                    historialActual.split(";").filter { it.isNotBlank() }.toMutableList()
+                historialList.add(0, nuevoRegistro)
+
+                // Limita el historial a un número fijo de registros
+                val maxRegistros = 50
+                if (historialList.size > maxRegistros) {
+                    historialList.removeAt(historialList.size - 1)
+                }
+
+                // Guarda el historial actualizado en SharedPreferences
+                val historialConcatenado = historialList.joinToString(";")
+                editor.putString("historial", historialConcatenado)
+                editor.apply()
             }
         }
 

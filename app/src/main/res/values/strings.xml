@@ -49,6 +49,32 @@
     <string name="dinero_ganado_0_0">Dinero ganado: 0.0</string>
     <string name="dinero_perdido_0_0">Dinero perdido: 0.0</string>
     <string name="resultados_de_los_partidos">Resultados de los partidos</string>
+    <string name="selecciona_un_partido_y_monto_v_lido">Selecciona un partido y monto válido</string>
+    <string name="selecciona_un_momio">Selecciona un momio</string>
+    <string name="apuesta_guardada">Apuesta guardada</string>
+    <string name="partido_vs_ganador">Partido: %1$s vs %2$s - Ganador: %3$s</string>
+    <string name="sin_resultado">Sin resultado</string>
+    <string name="hola_bienvenido">¡Hola, %1$s! Bienvenido 😊</string>
+    <string name="zero">0.0</string>
+    <string name="por_favor_ingresa_una_apuesta">Por favor, ingresa una apuesta.</string>
+    <string name="ingresa_una_apuesta_v_lida">Ingresa una apuesta válida.</string>
+    <string name="no_tienes_suficiente_saldo">No tienes suficiente saldo.</string>
+    <string name="saldo">Saldo: %1$s</string>
+    <string name="dinero_ganado">Dinero ganado: %1$s</string>
+    <string name="dinero_perdido">Dinero perdido: %1$s</string>
+    <string name="no_hubo_resultados">No hubo resultados</string>
+    <string name="datos_guardados">Datos guardados</string>
+    <string name="ganaste">" Ganaste: %1$s"</string>
+    <string name="no_tienes_saldo_suficiente">No tienes saldo suficiente</string>
+    <string name="momios">Momios</string>
+    <string name="saldoMenu">saldo</string>
+    <string name="monto_excede_saldo">El monto excede el saldo</string>
+    <string name="monto_no_negativo">El monto no puede ser negativo</string>
+    <string name="historial">Historial</string>
+    <string name="apuesta_multiplicador_ganancia">%1$s | Apuesta: %2$s | Multiplicador: %3$s | Ganancia: %4$s</string>
+    <string name="resultados_de_los_partidos_de_la_liga">Resultados de los Partidos de la Liga</string>
+    <string name="equipos">Equipos</string>
+    <string name="borrar_historial">Borrar historial</string>
     <string-array name="partidos_array">
         <item>Chivas vs Atlas</item>
         <item>América vs Pumas</item>

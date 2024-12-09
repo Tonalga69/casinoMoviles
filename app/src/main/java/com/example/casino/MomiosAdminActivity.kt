@@ -109,7 +109,7 @@ class MomiosAdminActivity : AppCompatActivity() {
             val partidosJson = Json.encodeToString(updatedPartidos)
             sharedPreferences.edit().putString("momios", partidosJson).apply()
 
-            Toast.makeText(this, "Datos guardados", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.datos_guardados), Toast.LENGTH_SHORT).show()
         }
     }
 }

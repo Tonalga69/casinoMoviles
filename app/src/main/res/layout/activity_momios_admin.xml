@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background_color"
     android:padding="16dp">
+    
+    
+
+
 
     <!-- Dropdown para seleccionar el partido -->
     <ImageView
+        android:contentDescription="@string/ajustar_momios"
         android:id="@+id/imageView"
         android:layout_width="35dp"
         android:layout_height="28dp"
+        android:background="@color/button_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/casino_fortuna_10_removebg_preview" />
@@ -24,92 +32,223 @@
 
     <TextView
         android:id="@+id/textView3"
+        android:fontFamily="@font/fraunces"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
-        android:text="Ajustar Momios"
+        android:textSize="30sp"
+        android:text="@string/ajustar_momios"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerPartidos"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/textViewGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/partido"
+        android:textColor="@color/black"
+        android:fontFamily="@font/jacques_francois_shadow"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        />
+     <androidx.cardview.widget.CardView
+         android:id="@+id/cardViewPatidos"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+         app:layout_constraintStart_toStartOf="parent"
+         android:padding="20dp"
+         app:cardBackgroundColor="@color/cardview_color"
+         app:cardCornerRadius="25dp"
+         app:layout_constraintTop_toBottomOf="@+id/textViewGame">
+         <Spinner
+             android:id="@+id/spinnerPartidos"
+             android:layout_margin="10dp"
+             android:layout_width="match_parent"
+             android:layout_height="36dp"
+             android:background="@drawable/edit_text_background"
+             android:entries="@array/partidos_array"
+             android:spinnerMode="dropdown"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textViewTeams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/equipos"
+        android:textColor="@color/black"
+        android:fontFamily="@font/jacques_francois_shadow"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewPatidos"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewEquipo1"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:entries="@array/partidos_array"
-        android:spinnerMode="dropdown"
+        app:cardBackgroundColor="@color/cardview_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTeams">
 
-    <TextView
-        android:id="@+id/equipo1"
-        android:layout_width="wrap_content"
+       <LinearLayout
+           android:orientation="vertical"
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:background="@drawable/edit_text_background"
+               android:layout_margin="20dp"
+               android:id="@+id/equipo1"
+               android:paddingStart="10dp"
+               android:paddingEnd="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="36dp"
+               android:text="@string/equipo_1"
+               android:textSize="20sp" />
+
+           <EditText
+                android:background="@drawable/edit_text_background"
+               android:layout_marginTop="10dp"
+               android:paddingStart="10dp"
+               android:paddingEnd="10dp"
+               android:layout_marginBottom="10dp"
+               android:id="@+id/momio1"
+               android:layout_width="100dp"
+               android:layout_height="wrap_content"
+               android:hint="@string/momio_a_favor_del_equipo_1"
+               android:inputType="numberDecimal" />
+
+       </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewEquipo2"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/equipo_1"
-        android:textSize="16sp"
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="@color/cardview_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPartidos" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewEquipo1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/momio1"
-        android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/equipo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/equipo_2"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textSize="20sp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewEquipo1" />
+
+            <EditText
+                android:id="@+id/momio2"
+                android:background="@drawable/edit_text_background"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/momio_a_favor_del_equipo_2"
+                android:inputType="numberDecimal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/equipo2" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewEmpate"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:hint="@string/momio_a_favor_del_equipo_1"
-        android:inputType="numberDecimal"
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="@color/cardview_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/equipo1" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewEquipo2">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/equipo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/equipo_2"
-        android:textSize="16sp"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_background"
+                android:textSize="20sp"
+                android:layout_marginTop="4dp"
+                android:text="@string/empate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewEquipo2" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/momio1" />
-
-    <EditText
-        android:id="@+id/momio2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="@string/momio_a_favor_del_equipo_2"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/equipo2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/empate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/momio2" />
-
-    <EditText
-        android:id="@+id/momio3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="@string/momio_para_empate"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <EditText
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/momio3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/momio_para_empate"
+                android:inputType="numberDecimal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+            
+        </LinearLayout>
+        
+    </androidx.cardview.widget.CardView>
+    
 
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="608dp"
+        android:backgroundTint="@color/button_color"
+        android:fontFamily="@font/jacques_francois_shadow"
         android:text="@string/guardar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
