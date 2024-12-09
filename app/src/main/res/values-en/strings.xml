@@ -71,8 +71,6 @@
     <string name="momios">Odds</string>
     <string name="saldoMenu">Balance</string>
     <string name="no_tienes_saldo_suficiente">You don\'t have enough balance</string>
-    <string name="historial">Historial</string>
-
     <string name="monto_excede_saldo">The amount exceeds the balance</string>
     <string name="monto_no_negativo">The amount cannot be negative</string>
     <string-array name="partidos_array">
